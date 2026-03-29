@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thorpe Park Sunday Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #DFF0F7;
+    --navy:  #12336B;
+    --red:   #E8514A;
+    --slate: #437495;
+    --ice:   #c8e4f0;
+    --white: #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--navy);
+    padding: 26px 32px 22px;
+  }
+
+/* HEADER */
+.eyebrow { text-align:center; font-size:7.5px; font-weight:600; letter-spacing:5px; color:var(–red); margin-bottom:5px; text-transform:uppercase; }
+h1 { text-align:center; font-family:‘Playfair Display’,serif; font-size:30px; font-weight:700; color:var(–navy); line-height:1.1; margin-bottom:3px; }
+.subtitle { text-align:center; font-family:‘Playfair Display’,serif; font-style:italic; font-size:12px; color:var(–slate); margin-bottom:8px; }
+.header-rule { border:none; border-top:0.5px solid rgba(18,51,107,0.2); margin:8px 0 12px; }
+
+/* TOP TWO COLUMNS */
+.top-grid { display:grid; grid-template-columns:1fr 1px 1fr; gap:0 18px; margin-bottom:14px; }
+.divider-line { background:rgba(18,51,107,0.15); }
+
+/* SECTIONS */
+.sec-title { font-size:7.5px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(–navy); margin-bottom:3px; }
+.sec-rule { border:none; border-top:1px solid var(–red); margin-bottom:9px; }
+
+/* TIMELINE */
+.timeline { display:flex; flex-direction:column; gap:5px; }
+.trow { display:flex; align-items:flex-start; gap:8px; }
+.tpill {
+flex-shrink:0; background:var(–navy); color:var(–white);
+font-size:6.5px; font-weight:700; padding:3px 6px; border-radius:3px;
+white-space:nowrap; min-width:62px; text-align:center; margin-top:1px;
+}
+.tpill.hl  { background:var(–red); }
+.tpill.alt { background:var(–slate); }
+.ttext .main { font-size:8px; font-weight:600; color:var(–navy); line-height:1.3; }
+.ttext .main.hl { color:var(–red); }
+.ttext .sub { font-size:6.5px; color:var(–slate); line-height:1.4; margin-top:1px; }
+
+/* INFO BOX */
+.info-box { background:var(–ice); border-radius:4px; padding:7px 9px; margin-top:10px; display:grid; grid-template-columns:1fr 1fr; gap:3px 8px; }
+.info-item { font-size:7px; color:var(–navy); line-height:1.4; }
+.info-item strong { color:var(–red); }
+
+/* MAP */
+.map-toggle {
+display:flex; align-items:center; justify-content:center; gap:6px;
+cursor:pointer; background:var(–navy); color:var(–white); border:none;
+border-radius:4px; padding:7px 10px; font-family:‘DM Sans’,sans-serif;
+font-size:7.5px; font-weight:600; width:100%; letter-spacing:0.5px; margin-bottom:7px;
+}
+.map-toggle:hover { background:var(–slate); }
+.map-frame { display:none; border-radius:5px; overflow:hidden; border:1px solid rgba(18,51,107,0.2); margin-bottom:8px; }
+.map-frame.open { display:block; }
+.map-frame iframe { width:100%; height:170px; border:none; display:block; }
+
+/* MAP ROUTE CARDS */
+.map-options { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:10px; }
+.map-card {
+background:var(–ice); border:1px solid rgba(18,51,107,0.15);
+border-radius:4px; padding:8px 9px; text-decoration:none; display:block;
+}
+.map-card:hover { background:rgba(18,51,107,0.07); }
+.map-card .card-label { font-size:7.5px; font-weight:700; color:var(–navy); margin-bottom:4px; padding-bottom:3px; border-bottom:1px solid rgba(18,51,107,0.12); }
+.map-card .card-step { font-size:6.5px; color:var(–slate); line-height:1.7; margin-top:3px; }
+.map-card .card-time { font-size:7.5px; font-weight:700; color:var(–red); margin-top:5px; }
+.map-card .card-price { font-size:6.5px; color:var(–slate); margin-top:1px; line-height:1.5; }
+.map-card .open-btn { display:inline-block; margin-top:5px; font-size:6px; font-weight:700; color:var(–white); background:var(–navy); border-radius:2px; padding:2px 6px; text-decoration:none; }
+
+/* LINKS */
+.links { display:flex; flex-direction:column; gap:5px; }
+.link-row { display:flex; flex-direction:column; gap:1px; }
+.link-label { font-size:7.5px; font-weight:600; color:var(–navy); }
+.link-url { font-size:6.5px; color:var(–slate); text-decoration:none; }
+.link-url:hover { color:var(–red); }
+.link-note { font-size:6px; color:var(–red); font-style:italic; }
+
+/* ── BOTTOM RESTAURANT SECTION ── */
+.bottom-section { border-top:0.5px solid rgba(18,51,107,0.2); padding-top:12px; }
+.rest-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:0; }
+.rest-card {
+background:var(–ice); border-radius:4px; padding:8px 9px;
+display:flex; flex-direction:column;
+}
+.rest-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px; }
+.rest-name { font-size:8px; font-weight:700; color:var(–navy); line-height:1.3; }
+.rest-tag { font-size:7px; font-weight:700; color:var(–red); white-space:nowrap; margin-left:4px; flex-shrink:0; }
+.rest-type { font-size:6.5px; font-weight:600; color:var(–slate); margin-bottom:3px; }
+.rest-detail { font-size:6.5px; color:var(–slate); line-height:1.5; }
+.rest-dist { font-size:6px; font-weight:600; color:var(–navy); margin-top:4px; background:rgba(18,51,107,0.07); border-radius:2px; padding:2px 5px; display:inline-block; }
+
+/* FOOTER */
+.footer { text-align:center; margin-top:12px; font-size:6.5px; font-weight:700; letter-spacing:3.5px; color:var(–red); text-transform:uppercase; border-top:0.5px solid rgba(18,51,107,0.2); padding-top:8px; }
+
+/* CORNERS */
+.corners { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; }
+.corner { position:absolute; width:40px; height:40px; border-radius:50%; border:0.5px solid rgba(18,51,107,0.13); }
+.corner.tl{top:12px;left:12px;} .corner.tr{top:12px;right:12px;}
+.corner.bl{bottom:12px;left:12px;} .corner.br{bottom:12px;right:12px;}
+.corner-inner { position:absolute; width:26px; height:26px; border-radius:50%; border:0.4px solid rgba(18,51,107,0.08); top:7px; left:7px; }
+</style>
+
+</head>
+<body>
+
+<div class="corners">
+  <div class="corner tl"><div class="corner-inner"></div></div>
+  <div class="corner tr"><div class="corner-inner"></div></div>
+  <div class="corner bl"><div class="corner-inner"></div></div>
+  <div class="corner br"><div class="corner-inner"></div></div>
+</div>
+
+<!-- HEADER -->
+
+<div class="eyebrow">· · · Sunday Option · 19.04.26 · · ·</div>
+<h1>Thorpe Park Day Plan 🎢</h1>
+<p class="subtitle">Sara's Bachelorette Weekend · London</p>
+<hr class="header-rule">
+
+<!-- TOP TWO COLUMNS -->
+
+<div class="top-grid">
+
+  <!-- LEFT: TIMELINE -->
+
+  <div>
+    <p class="sec-title">Full Day Timeline</p>
+    <hr class="sec-rule">
+    <div class="timeline">
+      <div class="trow">
+        <div class="tpill">7:30 AM</div>
+        <div class="ttext">
+          <div class="main">Quick grab & go breakfast</div>
+          <div class="sub">Nearby bakeries · Cafe Aldgate (5 min walk) from £6</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill">8:15 AM</div>
+        <div class="ttext">
+          <div class="main">Leave the hotel</div>
+          <div class="sub">Buckle Street Studios · Aldgate East</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill alt">OPTION A</div>
+        <div class="ttext">
+          <div class="main">Metro all the way · ~1h 56 min</div>
+          <div class="sub">District → Piccadilly → Hatton Cross · walk 3 min · Bus 446</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill alt">OPTION B</div>
+        <div class="ttext">
+          <div class="main">Via train · ~1h 41 min · faster!</div>
+          <div class="sub">District → Waterloo · SWR train → Staines · Bus 446</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill hl">10:00 AM</div>
+        <div class="ttext">
+          <div class="main hl">ARRIVE — gates open! 🎉</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill">10AM – 5PM</div>
+        <div class="ttext">
+          <div class="main">Full day of rides & thrills</div>
+          <div class="sub">Hyperia · Stealth · Nemesis Inferno · Tidal Wave · Colossus</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill">5:00 PM</div>
+        <div class="ttext">
+          <div class="main">Head back to London</div>
+          <div class="sub">Reverse your chosen route · ~1h 40–2h back</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill">6:45 PM</div>
+        <div class="ttext">
+          <div class="main">Back near the hotel</div>
+          <div class="sub">Drop bags · freshen up · head to dinner</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="tpill">7:30 PM</div>
+        <div class="ttext">
+          <div class="main">Farewell dinner near hotel</div>
+          <div class="sub">See restaurant picks below ↓</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="info-item"><strong>Tickets:</strong> From £32 online (walk-up ~£66!)</div>
+      <div class="info-item"><strong>Groups:</strong> 10+ = group discount available</div>
+      <div class="info-item"><strong>Open:</strong> 19 Apr 2026 ✓ confirmed · 10am–6pm</div>
+      <div class="info-item"><strong>Tip:</strong> Bring spare clothes — Tidal Wave soaks!</div>
+    </div>
+  </div>
+
+  <div class="divider-line"></div>
+
+  <!-- RIGHT: MAP + LINKS -->
+
+  <div>
+    <p class="sec-title">Journey Map</p>
+    <hr class="sec-rule">
+
+```
+<button class="map-toggle" onclick="toggleMap()">🗺️ Show Route — Buckle Street → Thorpe Park</button>
+<div class="map-frame" id="mapFrame">
+  <iframe
+    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyD-9tSrke72NouQmaK9rXpSiQR_HfNuasA&origin=Buckle+Street+Studios,+Whitechapel,+London+E1&destination=Thorpe+Park+Resort,+Staines+Road,+Chertsey,+KT16+8PN&mode=transit"
+    allowfullscreen loading="lazy">
+  </iframe>
+</div>
+
+<div class="map-options">
+  <a class="map-card" href="https://www.google.com/maps/dir/Buckle+Street+Studios+Aldgate+London/Thorpe+Park+Resort+Chertsey+KT16+8PN/@51.4,-0.3,10z/am=t!3e3" target="_blank">
+    <div class="card-label">🚇 Option A — Metro All the Way</div>
+    <div class="card-step">District → Piccadilly line</div>
+    <div class="card-step">→ Hatton Cross · walk 3 min</div>
+    <div class="card-step">→ Bus 446 → Thorpe Park</div>
+    <div class="card-time">~1h 56 min · every 10 min</div>
+    <div class="card-price">~£5.60 Oyster (tube) ✅<br>+ £5.40 Bus 446 single (cash/contactless)<br>= ~£11 total per person</div>
+    <span class="open-btn">Open in Google Maps ↗</span>
+  </a>
+  <a class="map-card" href="https://www.google.com/maps/dir/Buckle+Street+Studios+Aldgate+London/Thorpe+Park+Resort+Chertsey+KT16+8PN/@51.4,-0.3,10z/am=t!3e3" target="_blank">
+    <div class="card-label">🚂 Option B — Via Train (faster!)</div>
+    <div class="card-step">District → Waterloo</div>
+    <div class="card-step">→ SWR train → Staines</div>
+    <div class="card-step">→ Bus 446 → Thorpe Park</div>
+    <div class="card-time">~1h 41 min · every 10 min</div>
+    <div class="card-price">~£5.60 tube + ~£11–14 SWR ⚠️<br>+ £5.40 Bus 446 single<br>= ~£22–25 total per person</div>
+    <span class="open-btn">Open in Google Maps ↗</span>
+  </a>
+</div>
+
+<p class="sec-title">Booking Links</p>
+<hr class="sec-rule">
+<div class="links">
+  <div class="link-row">
+    <span class="link-label">🎢 Thorpe Park Tickets</span>
+    <a class="link-url" href="https://www.thorpepark.com/tickets-passes/" target="_blank">thorpepark.com/tickets-passes</a>
+    <span class="link-note">From £32 pp — group discount for 10+ people!</span>
+  </div>
+  <div class="link-row">
+    <span class="link-label">🚂 SWR Train: Waterloo → Staines (Option B only)</span>
+    <a class="link-url" href="https://www.southwesternrailway.com" target="_blank">southwesternrailway.com</a>
+    <span class="link-note">Must buy paper ticket — Oyster NOT valid</span>
+  </div>
+  <div class="link-row">
+    <span class="link-label">🚌 Bus 446 Info · £5.40 single · £7.60 return · Group return £15</span>
+    <a class="link-url" href="https://www.whitebus.co.uk" target="_blank">whitebus.co.uk · cash or contactless only</a>
+  </div>
+  <div class="link-row">
+    <span class="link-label">📱 Thorpe Park App (live ride wait times)</span>
+    <a class="link-url" href="https://www.thorpepark.com/plan-your-visit/before-you-visit/app/" target="_blank">thorpepark.com → App</a>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- BOTTOM: RESTAURANTS -->
+
+<div class="bottom-section">
+  <p class="sec-title">Farewell Dinner Near the Hotel · Aldgate East</p>
+  <hr class="sec-rule">
+  <div class="rest-grid">
+
+```
+<div class="rest-card">
+  <div class="rest-header">
+    <div class="rest-name">The Cardinal Bar & Kitchen</div>
+    <div class="rest-tag">⭐ 4.8</div>
+  </div>
+  <div class="rest-type">Bar & Grill</div>
+  <div class="rest-detail">Steaks, salmon & dumplings. Warm atmosphere, attentive service. Also open from 7am — great for morning breakfast before Thorpe Park!</div>
+  <div class="rest-dist">2 min walk · 9 Aldgate High St</div>
+</div>
+
+<div class="rest-card">
+  <div class="rest-header">
+    <div class="rest-name">DanDan Aldgate East</div>
+    <div class="rest-tag">⭐ 4.8</div>
+  </div>
+  <div class="rest-type">Sichuan Chinese · Halal</div>
+  <div class="rest-detail">Incredible dan dan noodles, braised beef & kung pao chicken. Halal options available. Perfect hearty comfort meal after a big day out 🍜</div>
+  <div class="rest-dist">5 min walk · 9 Stable Walk</div>
+</div>
+
+<div class="rest-card">
+  <div class="rest-header">
+    <div class="rest-name">The Sushi Co - Aldgate</div>
+    <div class="rest-tag">⭐ 4.9</div>
+  </div>
+  <div class="rest-type">Japanese · Sushi</div>
+  <div class="rest-detail">Fresh sushi, salmon tataki & boa buns. Modern atmosphere, great for groups. Open until 2am — no rush after a long day! 🍣</div>
+  <div class="rest-dist">5 min walk · 140 Minories</div>
+</div>
+
+<div class="rest-card">
+  <div class="rest-header">
+    <div class="rest-name">KOI Ramen Bar</div>
+    <div class="rest-tag">⭐ 4.4</div>
+  </div>
+  <div class="rest-type">Japanese · Ramen</div>
+  <div class="rest-detail">Cosy ramen bar, aubergine katsu curry & tonkotsu broth. Casual, no-fuss, deeply satisfying after a full day of rides 🍥</div>
+  <div class="rest-dist">3 min walk · 6 New Drum St</div>
+</div>
+
+<div class="rest-card">
+  <div class="rest-header">
+    <div class="rest-name">Cafe Aldgate</div>
+    <div class="rest-tag">⭐ 4.9</div>
+  </div>
+  <div class="rest-type">Cafe · British</div>
+  <div class="rest-detail">Beloved local cafe, full English from £6, linguine shrimp pasta. Incredibly friendly staff. Also the top pick for your 7:30am grab & go breakfast! 🥐</div>
+  <div class="rest-dist">5 min walk · 18 Wentworth St</div>
+</div>
+```
+
+  </div>
+</div>
+
+<div class="footer">· · · Sara's Bachelorette · London · April 2026 · · ·</div>
+
+<script>
+  function toggleMap() {
+    const frame = document.getElementById('mapFrame');
+    const btn = document.querySelector('.map-toggle');
+    const isOpen = frame.classList.contains('open');
+    frame.classList.toggle('open');
+    btn.textContent = isOpen
+      ? '🗺️ Show Route — Buckle Street → Thorpe Park'
+      : '🗺️ Hide Route Map';
+  }
+</script>
+
+</body>
+</html>
